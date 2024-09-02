@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de entradas</title>
+
+  <!-- IMPORTS -->
+  <link rel="stylesheet" type="text/css" href="/styles/global.css">
+</head>
+<body>
+
+<h1>Gestión de entradas</h1>
+<!-- Create -->
+<div>
+  <h2>Creación de entradas</h2>
+  <form action="/create/ticket">
+    <table>
+      <tr>
+        <td><label for="evento">Título evento</label></td>
+        <td><input type="text" name="evento" id="evento"></td>
+      </tr>
+      <tr>
+        <td><label for="tipo">Tipo</label></td>
+        <td><input type="text" name="tipo" id="tipo"></td>
+      </tr>
+      <tr>
+        <td><label for="precio">Precio</label></td>
+        <td><input type="text" name="precio" id="precio"></td>
+      </tr>
+      <tr>
+        <td><label for="propietario">Propietario</label></td>
+        <td><input type="text" name="propietario" id="propietario"></td>
+      </tr>
+      <tr>
+        <td><label for="sala">Sala</label></td>
+        <td><input type="text" id="sala"></td>
+      </tr>
+      <tr>
+        <td><label for="disponible">Disponible</label></td>
+        <td><input type="text" name="disponible" id="disponible" placeholder="Valor: true / false"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Crear"></td>
+      </tr>
+    </table>
+  </form>
+  <label class="oLabel">Entrada creada: </label>
+  <label class="oLabel" th:text = "${cEntrada?.id}"></label>
+</div>
+<!-- Read -->
+<div>
+  <h2>Mostrar todas las entradas</h2>
+  <form action="/read-all/ticket">
+    <input style="margin-bottom: 1%" type="submit" value="Buscar todo">
+    <table>
+      <tr th:each="entrada:${listEntradas}">
+        <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.id}"></td>
+        <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.evento}"></td>
+        <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.tipo}"></td>
+        <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.precio}"></td>
+        <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.propietario}"></td>
+        <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.disponible}"></td>
+      </tr>
+    </table>
+  </form>
+
+  <h2>Búsqueda de entradas por evento</h2>
+  <form action="/read-all-event/ticket">
+    <table>
+      <tr>
+        <td><label for="evento_read_evento">Título del evento</label></td>
+        <td><input type="text" name="evento" id="evento_read_evento"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Buscar"></td>
+      </tr>
+    </table>
+  </form>
+
+  <table>
+    <tr th:each="entrada:${listEntradasEvento}">
+      <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.id}"></td>
+      <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.evento}"></td>
+      <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.tipo}"></td>
+      <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.precio}"></td>
+      <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.propietario}"></td>
+      <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.disponible}"></td>
+    </tr>
+  </table>
+
+<h2>Búsqueda de entradas por propietario</h2>
+<form action="/read-all-owner/ticket">
+  <table>
+    <tr>
+      <td><label for="evento_read_propietario">Username del propietario</label></td>
+      <td><input type="text" name="propietario" id="evento_read_propietario"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="submit" value="Buscar"></td>
+    </tr>
+  </table>
+</form>
+
+<table>
+  <tr th:each="entrada:${listEntradasPropietario}">
+    <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.id}"></td>
+    <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.evento}"></td>
+    <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.tipo}"></td>
+    <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.precio}"></td>
+    <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.propietario}"></td>
+    <td style="width: auto; margin-bottom: 0.5%" th:text="${entrada.disponible}"></td>
+  </tr>
+</table>
+</div>
+
+<!-- Update -->
+<div>
+  <h2>Actualización de entradas</h2>
+  <form action="/update/ticket">
+    <table>
+      <tr>
+        <td><label for="id_update">ID entrada</label></td>
+        <td><input type="number" name="id" id="id_update"></td>
+      </tr>
+      <tr>
+        <td><label for="evento_update">Título evento</label></td>
+        <td><input type="text" name="evento" id="evento_update"></td>
+      </tr>
+      <tr>
+        <td><label for="tipo_update">Tipo</label></td>
+        <td><input type="text" name="tipo" id="tipo_update"></td>
+      </tr>
+      <tr>
+        <td><label for="precio_update">Precio</label></td>
+        <td><input type="text" name="precio" id="precio_update"></td>
+      </tr>
+      <tr>
+        <td><label for="propietario_update">Propietario</label></td>
+        <td><input type="text" name="propietario" id="propietario_update"></td>
+      </tr>
+      <tr>
+        <td><label for="sala_update">Sala</label></td>
+        <td><input type="text" name="sala" id="sala_update"></td>
+      </tr>
+      <tr>
+        <td><label for="disponible_update">Disponible</label></td>
+        <td><input type="text" name="disponible" id="disponible_update" placeholder="Valor: true / false"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Actualizar"></td>
+      </tr>
+    </table>
+  </form>
+  <label class="oLabel" th:text="${updatedString}">Todavía no se ha actualizado ninguna entrada</label>
+</div>
+<!-- Delete -->
+<div>
+  <h2>Borrado de entradas por ID</h2>
+  <form action="/delete/ticket">
+    <table>
+      <tr>
+        <td><label for="titulo_delete">Id de la entrada</label></td>
+        <td><input type="text" name="id" id="titulo_delete"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Eliminar"></td>
+      </tr>
+    </table>
+  </form>
+  <label class="oLabel" th:text="${deletedString}">Todavía no se ha eliminado ninguna entrada</label>
+</div>
+</body>
+</html>

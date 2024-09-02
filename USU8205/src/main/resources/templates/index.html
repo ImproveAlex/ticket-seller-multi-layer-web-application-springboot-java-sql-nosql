@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de usuarios</title>
+
+    <!-- IMPORTS -->
+    <link rel="stylesheet" type="text/css" href="/styles/global.css">
+</head>
+<body>
+
+    <h1>Gestión de usuarios</h1>
+    <!-- Create -->
+    <div>
+        <h2>Creación de usuarios</h2>
+        <form action="/create/user">
+            <table>
+                <tr>
+                    <td><label>Nombre</label></td>
+                    <td><input type="text" name="nombre"></td>
+                </tr>
+                <tr>
+                    <td><label>Apellido 1</label></td>
+                    <td><input type="text" name="ap1"></td>
+                </tr>
+                <tr>
+                    <td><label>Apellido 2</label></td>
+                    <td><input type="text" name="ap2"></td>
+                </tr>
+                <tr>
+                    <td><label>Usuario</label></td>
+                    <td><input type="text" name="username"></td>
+                </tr>
+                <tr>
+                    <td><label>Contraseña</label></td>
+                    <td><input type="password" name="pass"></td>
+                </tr>
+                <tr>
+                    <td><label>Dirección</label></td>
+                    <td><input type="text" name="dir"></td>
+                </tr>
+                <tr>
+                    <td><label>Teléfono</label></td>
+                    <td><input type="text" name="tlf"></td>
+                </tr>
+                <tr>
+                    <td><label>Administrador</label></td>
+                    <td><input type="text" name="administrador" placeholder="true / false"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Crear"></td>
+                </tr>
+            </table>
+        </form>
+        <label class="oLabel">Usuario creado: </label>
+        <label class="oLabel" th:text = "${cUsuario?.username}"></label>
+    </div>
+    <!-- Read -->
+    <div>
+        <h2>Mostrar todos los usuarios</h2>
+        <form action="/read-all/user">
+            <input style="margin-bottom: 1%" type="submit" value="Buscar todos">
+            <table>
+                <tr th:each="usuario:${listUsuarios}">
+                    <td style="width: auto; margin-bottom: 0.5%" th:text="${usuario.id}"></td>
+                    <td style="width: auto; margin-bottom: 0.5%" th:text="${usuario.nombre}"></td>
+                    <td style="width: auto; margin-bottom: 0.5%" th:text="${usuario.ap1}"></td>
+                    <td style="width: auto; margin-bottom: 0.5%" th:text="${usuario.ap2}"></td>
+                    <td style="width: auto; margin-bottom: 0.5%" th:text="${usuario.username}"></td>
+                    <td style="width: auto; margin-bottom: 0.5%" th:text="${usuario.pass}"></td>
+                    <td style="width: auto; margin-bottom: 0.5%" th:text="${usuario.dir}"></td>
+                    <td style="width: auto; margin-bottom: 0.5%" th:text="${usuario.tlf}"></td>
+                    <td style="width: auto; margin-bottom: 0.5%" th:text="${usuario.administrador}"></td>
+                </tr>
+            </table>
+        </form>
+
+        <h2>Búsqueda de usuarios</h2>
+        <form action="/read/user">
+            <table>
+                <tr>
+                    <td><label>Username</label></td>
+                    <td><input type="text" name="username"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Buscar"></td>
+                </tr>
+            </table>
+        </form>
+
+        <tr>
+            <td><label style="text-align: right" class="oLabel">Id :</label><label style="text-align: left" class="oLabel" th:text="${rUsuario?.id}"></label></td>
+            <td><label style="text-align: right" class="oLabel">Nombre :</label><label style="text-align: left" class="oLabel" th:text="${rUsuario?.nombre}"></label></td>
+            <td><label style="text-align: right" class="oLabel">Apellido 1 :</label><label style="text-align: left" class="oLabel" th:text="${rUsuario?.ap1}"></label></td>
+            <td><label style="text-align: right" class="oLabel">Apellido 2 :</label><label style="text-align: left" class="oLabel" th:text="${rUsuario?.ap2}"></label></td>
+            <td><label style="text-align: right" class="oLabel">Username :</label><label style="text-align: left" class="oLabel" th:text="${rUsuario?.username}"></label></td>
+            <td><label style="text-align: right" class="oLabel">Contraseña :</label><label style="text-align: left" class="oLabel" th:text="${rUsuario?.pass}"></label></td>
+            <td><label style="text-align: right" class="oLabel">Dirección :</label><label style="text-align: left" class="oLabel" th:text="${rUsuario?.dir}"></label></td>
+            <td><label style="text-align: right" class="oLabel">Teléfono :</label><label style="text-align: left" class="oLabel" th:text="${rUsuario?.tlf}"></label></td>
+            <td><label style="text-align: right" class="oLabel">Administrador :</label><label style="text-align: left" class="oLabel" th:text="${rUsuario?.administrador}"></label></td>
+        </tr>
+    </div>
+
+    <!-- Update -->
+    <div>
+        <h2>Actualización de usuarios</h2>
+        <form action="/update/user">
+            <table>
+                <tr>
+                    <td><label>Nombre</label></td>
+                    <td><input type="text" name="nombre"></td>
+                </tr>
+                <tr>
+                    <td><label>Apellido 1</label></td>
+                    <td><input type="text" name="ap1"></td>
+                </tr>
+                <tr>
+                    <td><label>Apellido 2</label></td>
+                    <td><input type="text" name="ap2"></td>
+                </tr>
+                <tr>
+                    <td><label>Usuario</label></td>
+                    <td><input type="text" name="username"></td>
+                </tr>
+                <tr>
+                    <td><label>Contraseña</label></td>
+                    <td><input type="password" name="pass"></td>
+                </tr>
+                <tr>
+                    <td><label>Dirección</label></td>
+                    <td><input type="text" name="dir"></td>
+                </tr>
+                <tr>
+                    <td><label>Teléfono</label></td>
+                    <td><input type="text" name="tlf"></td>
+                </tr>
+                <tr>
+                    <td><label>Administrador</label></td>
+                    <td><input type="text" name="administrador" placeholder="true / false"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Actualizar"></td>
+                </tr>
+            </table>
+        </form>
+        <label class="oLabel" th:text="${updatedString}">Todavía no se ha actualizado ningún usuario</label>
+    </div>
+    <!-- Delete -->
+    <div>
+        <h2>Borrado de usuarios</h2>
+        <form action="/delete/user">
+            <table>
+                <tr>
+                    <td><label>Username</label></td>
+                    <td><input type="text" name="username"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Eliminar"></td>
+                </tr>
+            </table>
+        </form>
+        <label class="oLabel" th:text="${deletedString}">Todavía no se ha eliminado ningún usuario</label>
+    </div>
+</body>
+</html>

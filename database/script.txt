@@ -1,0 +1,63 @@
+-- creamos la base de datos y la usamos
+create database if not exists BD82_05_ticketseller;
+
+use BD82_05_ticketseller;
+
+-- eliminar las tablas
+drop table if exists entradas;
+drop table if exists eventos;
+drop table if exists mensajes;
+drop table if exists usuarios;
+
+
+-- en vez de una segunda tabla administradores ponemos un booleano
+create table usuarios(
+id int not null AUTO_INCREMENT primary key,
+nombre varchar(50) not null, 
+ap1 varchar(50) not null, 
+ap2 varchar(50), 
+username varchar(50) not null unique, 
+pass varchar(50) not null, 
+dir varchar(50) not null, 
+tlf int,
+administrador boolean);
+
+
+-- para la foto se supone que se introduciría un link
+create table eventos (
+id int not null AUTO_INCREMENT primary key,
+titulo varchar(50) unique not null, 
+categoria varchar(50) not null, 
+fecha date not null, 
+ciudad varchar(50) not null, 
+sala int not null, 
+imagen varchar(500) not null);
+
+
+create table entradas(
+id int not null AUTO_INCREMENT, 
+evento varchar(50) not null, 
+tipo varchar(50) not null, 
+precio int not null, 
+propietario varchar(50) not null, 
+disponible boolean not null,
+PRIMARY KEY (id),
+foreign key (evento) references eventos(titulo),
+foreign key (propietario) references usuarios(username));
+
+
+create table mensajes(
+    id int not null AUTO_INCREMENT,
+    emisor varchar(50) not null,
+    receptor varchar(50) not null,
+    mensaje varchar(500) not null,
+    PRIMARY KEY (id),
+    FOREIGN KEY (emisor) references usuarios(username),
+    FOREIGN KEY (receptor) references usuarios(username)
+);
+
+
+
+insert into usuarios values(1, 'Álvaro','Morata','','AMorata086','1234','calle de la Universidad','666013275',true);
+insert into eventos values(1,"Slipknot", 'Concierto', '2022-12-05','Leganés', 3,'https://akamai.sscdn.co/uploadfile/letras/fotos/5/2/6/6/5266e6a16b5fe4501de0d70cb2935f48.jpg');
+insert into entradas values(1,"Slipknot",'grada',300,'AMorata086',true);
