@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de eventos</title>
+
+    <!-- IMPORTS -->
+    <link rel="stylesheet" type="text/css" href="/styles/global.css">
+</head>
+<body>
+
+<h1>Gestión de eventos</h1>
+<!-- Create -->
+<div>
+    <h2>Creación de eventos</h2>
+    <form action="/create/event">
+        <table>
+            <tr>
+                <td><label for="titulo">Título</label></td>
+                <td><input type="text" name="titulo" id="titulo"></td>
+            </tr>
+            <tr>
+                <td><label for="categoria">Categoría</label></td>
+                <td><input type="text" name="categoria" id="categoria"></td>
+            </tr>
+            <tr>
+                <td><label for="fecha">Fecha</label></td>
+                <td><input type="date" name="fecha" id="fecha"></td>
+            </tr>
+            <tr>
+                <td><label for="ciudad">Ciudad</label></td>
+                <td><input type="text" name="ciudad" id="ciudad"></td>
+            </tr>
+            <tr>
+                <td><label for="sala">Sala</label></td>
+                <td><input type="text" id="sala"></td>
+            </tr>
+            <tr>
+                <td><label for="imagen">Imagen evento</label></td>
+                <td><input type="text" name="imagen" id="imagen" placeholder="inserte url de la imagen"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Crear"></td>
+            </tr>
+        </table>
+    </form>
+    <label class="oLabel">Evento creado: </label>
+    <label class="oLabel" th:text = "${cEvento?.titulo}"></label>
+</div>
+<!-- Read -->
+<div>
+    <h2>Mostrar todos los eventos</h2>
+    <form action="/read-all/event">
+        <input style="margin-bottom: 1%" type="submit" value="Buscar todos">
+        <table>
+            <tr th:each="evento:${listEventos}">
+                <td style="width: auto; margin-bottom: 0.5%" th:text="${evento.id}"></td>
+                <td style="width: auto; margin-bottom: 0.5%" th:text="${evento.titulo}"></td>
+                <td style="width: auto; margin-bottom: 0.5%" th:text="${evento.categoria}"></td>
+                <td style="width: auto; margin-bottom: 0.5%" th:text="${evento.fecha}"></td>
+                <td style="width: auto; margin-bottom: 0.5%" th:text="${evento.ciudad}"></td>
+                <td style="width: auto; margin-bottom: 0.5%" th:text="${evento.sala}"></td>
+                <td style="width: auto; margin-bottom: 0.5%" th:text="${evento.imagen}"></td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Búsqueda de eventos</h2>
+    <form action="/read/event">
+        <table>
+            <tr>
+                <td><label for="titulo_read">Título</label></td>
+                <td><input type="text" name="titulo" id="titulo_read"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Buscar"></td>
+            </tr>
+        </table>
+    </form>
+
+    <tr>
+        <td><label style="text-align: right" class="oLabel">Id :</label><label style="text-align: left" class="oLabel" th:text="${rEvento?.id}"></label></td>
+        <td><label style="text-align: right" class="oLabel">Título :</label><label style="text-align: left" class="oLabel" th:text="${rEvento?.titulo}"></label></td>
+        <td><label style="text-align: right" class="oLabel">Categoría :</label><label style="text-align: left" class="oLabel" th:text="${rEvento?.categoria}"></label></td>
+        <td><label style="text-align: right" class="oLabel">Fecha :</label><label style="text-align: left" class="oLabel" th:text="${rEvento?.fecha}"></label></td>
+        <td><label style="text-align: right" class="oLabel">Ciudad :</label><label style="text-align: left" class="oLabel" th:text="${rEvento?.ciudad}"></label></td>
+        <td><label style="text-align: right" class="oLabel">Sala :</label><label style="text-align: left" class="oLabel" th:text="${rEvento?.sala}"></label></td>
+        <td><label style="text-align: right" class="oLabel">Imagen :</label><label style="text-align: left" class="oLabel" th:text="${rEvento?.imagen}"></label></td>
+    </tr>
+</div>
+
+<!-- Update -->
+<div>
+    <h2>Actualización de eventos</h2>
+    <form action="/update/event">
+        <table>
+            <tr>
+                <td><label for="titulo_update">Título</label></td>
+                <td><input type="text" name="titulo" id="titulo_update"></td>
+            </tr>
+            <tr>
+                <td><label for="categoria_update">Categoría</label></td>
+                <td><input type="text" name="categoria" id="categoria_update"></td>
+            </tr>
+            <tr>
+                <td><label for="fecha_update">Fecha</label></td>
+                <td><input type="date" name="fecha" id="fecha_update"></td>
+            </tr>
+            <tr>
+                <td><label for="ciudad_update">Ciudad</label></td>
+                <td><input type="text" name="ciudad" id="ciudad_update"></td>
+            </tr>
+            <tr>
+                <td><label for="sala_update">Sala</label></td>
+                <td><input type="text" id="sala_update"></td>
+            </tr>
+            <tr>
+                <td><label for="imagen_update">Imagen evento</label></td>
+                <td><input type="text" name="imagen" id="imagen_update" placeholder="inserte url de la imagen"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Crear"></td>
+            </tr>
+        </table>
+    </form>
+    <label class="oLabel" th:text="${updatedString}">Todavía no se ha actualizado ningún evento</label>
+</div>
+<!-- Delete -->
+<div>
+    <h2>Borrado de eventos</h2>
+    <form action="/delete/event">
+        <table>
+            <tr>
+                <td><label for="titulo_delete">Título</label></td>
+                <td><input type="text" name="titulo" id="titulo_delete"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Eliminar"></td>
+            </tr>
+        </table>
+    </form>
+    <label class="oLabel" th:text="${deletedString}">Todavía no se ha eliminado ningún evento</label>
+</div>
+</body>
+</html>
